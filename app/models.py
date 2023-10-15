@@ -1,7 +1,7 @@
 from django.db import models
 from django.core.validators import MinValueValidator
 
-from django.utils.datetime_safe import datetime
+
 
 
 class Carro(models.Model):
@@ -9,4 +9,6 @@ class Carro(models.Model):
     marca = models.CharField(max_length=50, null=False)
     ano = models.PositiveIntegerField(validators=[MinValueValidator(2000)], null=False)
     valor = models.FloatField(null=False)
-    data_cadastro = models.DateTimeField(default=datetime.now(), null=False)
+    data_cadastro = models.DateTimeField(auto_now_add=True)
+    
+
