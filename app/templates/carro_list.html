@@ -4,6 +4,7 @@
 
 
 {% block content %}
+
 <form method="get">
     {% csrf_token %}
 
@@ -11,7 +12,7 @@
     <button type="submit" class="btn btn-primary">Buscar</button>
 </form>
 
-<table class="table">
+<table class="table" style="margin-top: 50px;">
     <thead>
     <tr>
         <th>Modelo</th>

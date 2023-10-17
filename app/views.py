@@ -13,8 +13,12 @@ def cadastrar_carro(request):
 
 
 def listar_carro(request):
-    carros = Carro.objects.all()
-    return render(request, 'carro_list.html', {'lista': carros})
+    query = request.GET.get("busca")
+    if query:
+        carro = Carro.objects.filter(modelo__icontains=query)
+    else:
+        carro = Carro.objects.all()
+    return render(request, 'carro_list.html', {'lista': carro})
 
 
 def editar_carro(request, pk):
@@ -27,3 +31,10 @@ def editar_carro(request, pk):
     else:
         form = CarroForm(instance=carro)
     return render(request, 'carro_form.html', {'form': form})
+
+def remover_carro(request, pk):
+    carro = Carro.objects.get(pk=pk)
+    if request.method == 'POST':
+        carro.delete()
+        return redirect('carro_list')
+    return render(request, 'carro_delete.html', {'carro': carro})
